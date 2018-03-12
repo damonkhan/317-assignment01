@@ -15,8 +15,13 @@ class MakeRuns {
             return;
         }
 
+        //initialize heap
+
+        // Create heap of size k
+        int maxSize = Integer.parseInt(args[0]);
+
         System.out.println("The Min Heap is ");
-        MinHeap minHeap = new MinHeap(15);
+        MinHeap minHeap = new MinHeap(maxSize);
         minHeap.insert(5);
         minHeap.insert(3);
         minHeap.insert(17);
