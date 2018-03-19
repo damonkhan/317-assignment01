@@ -22,15 +22,10 @@ class MakeRuns {
 
         System.out.println("The Min Heap is ");
         MinHeap minHeap = new MinHeap(maxSize);
-        minHeap.insert(5);
-        minHeap.insert(3);
-        minHeap.insert(17);
-        minHeap.insert(10);
-        minHeap.insert(84);
-        minHeap.insert(19);
-        minHeap.insert(6);
-        minHeap.insert(22);
-        minHeap.insert(9);
+        minHeap.insert("d");
+        minHeap.insert("c");
+        minHeap.insert("b");
+        minHeap.insert("a");
         minHeap.minHeap();
 
         minHeap.print();

@@ -8,7 +8,7 @@ package runs;
 
 class MinHeap
 {
-    private int[] Heap;
+    private String[] Heap;
     private int size;
     private int maxsize;
 
@@ -18,8 +18,7 @@ class MinHeap
     {
         this.maxsize = maxsize;
         this.size = 0;
-        Heap = new int[this.maxsize + 1];
-        Heap[0] = Integer.MIN_VALUE;
+        Heap = new String[this.maxsize + 1];
     }
 
     private int parent(int pos)
@@ -48,7 +47,7 @@ class MinHeap
 
     private void swap(int fpos, int spos)
     {
-        int tmp;
+        String tmp;
         tmp = Heap[fpos];
         Heap[fpos] = Heap[spos];
         Heap[spos] = tmp;
@@ -58,9 +57,9 @@ class MinHeap
     {
         if (!isLeaf(pos))
         {
-            if ( Heap[pos] > Heap[leftChild(pos)]  || Heap[pos] > Heap[rightChild(pos)])
+            if ( Heap[pos].compareTo(Heap[leftChild(pos)]) == 1  || Heap[pos].compareTo(Heap[rightChild(pos)]) == 1)
             {
-                if (Heap[leftChild(pos)] < Heap[rightChild(pos)])
+                if (Heap[leftChild(pos)].compareTo(Heap[rightChild(pos)]) == -1)
                 {
                     swap(pos, leftChild(pos));
                     minHeapify(leftChild(pos));
@@ -73,15 +72,19 @@ class MinHeap
         }
     }
 
-    public void insert(int element)
+    public void insert(String element)
     {
-        Heap[++size] = element;
-        int current = size;
 
-        while (Heap[current] < Heap[parent(current)])
-        {
-            swap(current,parent(current));
-            current = parent(current);
+        if (Heap[0] == null) {
+            Heap[0] = element;
+        } else {
+            Heap[++size] = element;
+            int current = size;
+
+            while (Heap[current].compareTo(Heap[parent(current)]) == -1) {
+                swap(current, parent(current));
+                current = parent(current);
+            }
         }
     }
 
@@ -103,9 +106,9 @@ class MinHeap
         }
     }
 
-    public int remove()
+    public String remove()
     {
-        int popped = Heap[FRONT];
+        String popped = Heap[FRONT];
         Heap[FRONT] = Heap[size--];
         minHeapify(FRONT);
         return popped;
