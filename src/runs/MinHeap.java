@@ -40,9 +40,9 @@ class MinHeap
     {
         if (pos >=  (size / 2)  &&  pos <= size)
         {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     private void swap(int fpos, int spos)
@@ -55,11 +55,15 @@ class MinHeap
 
     private void minHeapify(int pos)
     {
-        if (!isLeaf(pos))
+        String parent = Heap[pos];
+        String left = Heap[leftChild(pos)];
+        String right = Heap[rightChild(pos)];
+
+        if (right != null)
         {
-            if ( Heap[pos].compareTo(Heap[leftChild(pos)]) == 1  || Heap[pos].compareTo(Heap[rightChild(pos)]) == 1)
+            if (parent.compareTo(left) > 0 || parent.compareTo(right) > 0)
             {
-                if (Heap[leftChild(pos)].compareTo(Heap[rightChild(pos)]) == -1)
+                if (left.compareTo(right) < 0)
                 {
                     swap(pos, leftChild(pos));
                     minHeapify(leftChild(pos));
@@ -69,6 +73,10 @@ class MinHeap
                     minHeapify(rightChild(pos));
                 }
             }
+        }
+        if (parent.compareTo(left) > 0)
+        {
+            swap(pos, leftChild(pos));
         }
     }
 
@@ -81,7 +89,7 @@ class MinHeap
             return;
         }
 
-        while (parent(current) == 0 || Heap[current].compareTo(Heap[parent(current)]) == -1) {
+        while (parent(current) == 0 || Heap[current].compareTo(Heap[parent(current)]) < 0) {
             if (parent(current) == 0)
                 return;
             swap(current, parent(current));
