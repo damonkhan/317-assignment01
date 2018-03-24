@@ -81,7 +81,9 @@ class MinHeap
             return;
         }
 
-        while (Heap[current].compareTo(Heap[parent(current)]) == -1) {
+        while (parent(current) == 0 || Heap[current].compareTo(Heap[parent(current)]) == -1) {
+            if (parent(current) == 0)
+                return;
             swap(current, parent(current));
             current = parent(current);
         }
