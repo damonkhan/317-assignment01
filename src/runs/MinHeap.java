@@ -85,9 +85,11 @@ class MinHeap
 
     public void insert(String element)
     {
-        Heap[++size] = element;
-        int current = size;
-
+        size++;
+        if (size < maxsize)
+            Heap[size] = element;
+        else
+            System.err.println("Error: '" + element + "' - heap at capacity");
     }
 
     public void print()
@@ -114,5 +116,9 @@ class MinHeap
         Heap[FRONT] = Heap[size--];
         minHeapify(FRONT);
         return popped;
+    }
+
+    public String minValue() {
+        return Heap[1];
     }
 }
