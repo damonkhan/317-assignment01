@@ -74,17 +74,16 @@ class MinHeap
 
     public void insert(String element)
     {
+        Heap[++size] = element;
+        int current = size;
 
-        if (Heap[0] == null) {
-            Heap[0] = element;
-        } else {
-            Heap[++size] = element;
-            int current = size;
+        if (size == 1) {
+            return;
+        }
 
-            while (Heap[current].compareTo(Heap[parent(current)]) == -1) {
-                swap(current, parent(current));
-                current = parent(current);
-            }
+        while (Heap[current].compareTo(Heap[parent(current)]) == -1) {
+            swap(current, parent(current));
+            current = parent(current);
         }
     }
 
