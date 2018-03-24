@@ -7,6 +7,10 @@
 
 package runs;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 class MakeRuns {
 
     public static void main(String args[]) {
@@ -15,29 +19,41 @@ class MakeRuns {
             return;
         }
 
-        //initialize heap
+        try {
 
-        // Create heap of size k
-        int maxSize = Integer.parseInt(args[0]) + 1;
-        String file  = args[1];
+            // Initialize all the parts...
+            int maxSize = Integer.parseInt(args[0]) + 1;
+            String path = "/Users/damonkhan/Desktop/" + args[1];
+            MinHeap minHeap = new MinHeap(maxSize);
+            File file = new File(path);
 
-        System.out.println("The Min Heap is ");
-        MinHeap minHeap = new MinHeap(maxSize);
-        minHeap.insert("c");
-        minHeap.insert("b");
-        minHeap.insert("d");
-        minHeap.insert("a");
-        minHeap.insert("e");
-        minHeap.insert("f");
-        Heapify(minHeap);
-        minHeap.print();
+            if (!file.exists()) {
+                System.out.println("Error: file not found");
+                return;
+            }
 
-        System.out.println("Next out is " + minHeap.minValue());
-        minHeap.remove();
-        minHeap.minHeap();
-        minHeap.print();
-        System.out.println("Next out is " + minHeap.minValue());
+            FileReader fReader = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fReader);
 
+            // Build the heap
+            for (int i = 1; i < maxSize; i++)
+            {
+                minHeap.insert(reader.readLine());
+            }
+
+            Heapify(minHeap);
+            System.out.println("The Min Heap is ");
+            minHeap.print();
+
+            System.out.println("Next out is " + minHeap.minValue());
+            minHeap.remove();
+            minHeap.minHeap();
+            minHeap.print();
+            System.out.println("Next out is " + minHeap.minValue());
+        }
+        catch (Exception e) {
+            System.err.println(e);
+        }
 
     }
 
