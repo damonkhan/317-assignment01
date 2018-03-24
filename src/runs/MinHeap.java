@@ -66,17 +66,20 @@ class MinHeap
                 if (left.compareTo(right) < 0)
                 {
                     swap(pos, leftChild(pos));
-                    minHeapify(leftChild(pos));
+                    return;
+
                 }else
                 {
                     swap(pos, rightChild(pos));
-                    minHeapify(rightChild(pos));
+                    return;
+
                 }
             }
         }
         if (parent.compareTo(left) > 0)
         {
             swap(pos, leftChild(pos));
+
         }
     }
 
@@ -85,16 +88,6 @@ class MinHeap
         Heap[++size] = element;
         int current = size;
 
-        if (size == 1) {
-            return;
-        }
-
-        while (parent(current) == 0 || Heap[current].compareTo(Heap[parent(current)]) < 0) {
-            if (parent(current) == 0)
-                return;
-            swap(current, parent(current));
-            current = parent(current);
-        }
     }
 
     public void print()
