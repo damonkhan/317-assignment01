@@ -121,4 +121,11 @@ class MinHeap
     public String minValue() {
         return Heap[1];
     }
+
+    public String replace(String newRoot) {
+        String popped = Heap[FRONT];
+        Heap[FRONT] = newRoot;
+        minHeapify(FRONT);
+        return popped;
+    }
 }
