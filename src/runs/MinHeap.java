@@ -38,7 +38,7 @@ class MinHeap {
         return true;
     }
 
-    private void swap(int fpos, int spos) {
+    public void swap(int fpos, int spos) {
         String tmp;
         tmp = Heap[fpos];
         Heap[fpos] = Heap[spos];

@@ -19,6 +19,8 @@ class MakeRuns {
 
         // Initialize all the parts...
         int maxSize = Integer.parseInt(args[0]) + 1;
+        int tmpSize = maxSize - 1;
+        int numRuns = 0;
         String input = "/Users/damonkhan/Desktop/" + args[1];
         String output = "/Users/damonkhan/Desktop/" + args[1] + ".runs";
         MinHeap minHeap = new MinHeap(maxSize);
@@ -28,6 +30,7 @@ class MakeRuns {
         FileReader fReader;
         BufferedReader reader;
         PrintWriter writer;
+
 
 
         try {
@@ -48,16 +51,42 @@ class MakeRuns {
                 minHeap.insert(reader.readLine());
             }
 
-            Heapify(minHeap);
-            printHeap(minHeap);
-            out = minHeap.replace("g");
+            heapify(minHeap);
+            String in = reader.readLine();
+            out = minHeap.replace(in);
             writer.println(out);
-            printHeap(minHeap);
-            out = minHeap.replace("h");
-            writer.println(out);
-            printHeap(minHeap);
+            in = reader.readLine();
+
+            while (in != null) {
+                while (tmpSize > 0) {
+                    if (in.compareTo(out) >= 0)
+                    {
+                        out = minHeap.replace(in);
+                        writer.println(out);
+                    }
+                    else {
+                        minHeap.swap(1, tmpSize);
+                        minHeap.minHeap();
+                        tmpSize--;
+                    }
+                }
+                writer.println("**");
+                minHeap.minHeap();
+                tmpSize = maxSize - 1;
+                numRuns++;
+            }
+
+
+//            printHeap(minHeap);
+//            out = minHeap.replace("g");
+//            writer.println(out);
+//            printHeap(minHeap);
+//            out = minHeap.replace("h");
+//            writer.println(out);
+//            printHeap(minHeap);
 
             writer.close();
+            System.err.println("number of runs: " + Integer.toString(numRuns));
         }
         catch (Exception e) {
             System.err.println(e);
@@ -65,7 +94,7 @@ class MakeRuns {
 
     }
 
-    public static void Heapify(MinHeap heap) {
+    public static void heapify(MinHeap heap) {
         // Do it twice for sanity...
         for (int i = 0; i < 2; i++) {
             heap.minHeap();
