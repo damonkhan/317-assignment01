@@ -45,6 +45,12 @@ class MakeRuns {
             System.out.println("The Min Heap is ");
             minHeap.print();
             System.out.println("Next out is " + minHeap.minValue());
+
+            minHeap.replace("g");
+            System.out.println("The Min Heap is ");
+            minHeap.print();
+            System.out.println("Next out is " + minHeap.minValue());
+
         }
         catch (Exception e) {
             System.err.println(e);

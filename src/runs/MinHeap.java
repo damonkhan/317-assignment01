@@ -126,6 +126,7 @@ class MinHeap
         String popped = Heap[FRONT];
         Heap[FRONT] = newRoot;
         minHeapify(FRONT);
+        minHeap();
         return popped;
     }
 }
