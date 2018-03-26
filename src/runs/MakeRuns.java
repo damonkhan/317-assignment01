@@ -44,12 +44,13 @@ class MakeRuns {
             Heapify(minHeap);
             System.out.println("The Min Heap is ");
             minHeap.print();
-            System.out.println("Next out is " + minHeap.minValue());
+            System.out.println("Next out is \"" + minHeap.minValue() + "\"");
+            System.out.println();
 
             minHeap.replace("g");
             System.out.println("The Min Heap is ");
             minHeap.print();
-            System.out.println("Next out is " + minHeap.minValue());
+            System.out.println("Next out is \"" + minHeap.minValue() + "\"");
 
         }
         catch (Exception e) {
