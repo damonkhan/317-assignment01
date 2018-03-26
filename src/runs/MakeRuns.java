@@ -1,15 +1,13 @@
 //////////////////////////////////////////////////////////////////////////////
 //                                                                          //
-// Authors: Damon Khan & Riley Cochrane                                     //
+// Authors: Damon Khan 1265776 & Riley Cochrane                              //
 //                                                                          //
 //////////////////////////////////////////////////////////////////////////////
 
 
 package runs;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 
 class MakeRuns {
 
@@ -19,21 +17,30 @@ class MakeRuns {
             return;
         }
 
+        // Initialize all the parts...
+        int maxSize = Integer.parseInt(args[0]) + 1;
+        String input = "/Users/damonkhan/Desktop/" + args[1];
+        String output = "/Users/damonkhan/Desktop/" + args[1] + ".runs";
+        MinHeap minHeap = new MinHeap(maxSize);
+        File inputFile = new File(input);
+        File outputFile = new File(output);
+        String out = "";
+        FileReader fReader;
+        BufferedReader reader;
+        PrintWriter writer;
+
+
         try {
 
-            // Initialize all the parts...
-            int maxSize = Integer.parseInt(args[0]) + 1;
-            String path = "/Users/damonkhan/Desktop/" + args[1];
-            MinHeap minHeap = new MinHeap(maxSize);
-            File file = new File(path);
 
-            if (!file.exists()) {
+            if (!inputFile.exists()) {
                 System.out.println("Error: file not found");
                 return;
             }
 
-            FileReader fReader = new FileReader(file);
-            BufferedReader reader = new BufferedReader(fReader);
+            fReader = new FileReader(inputFile);
+            reader = new BufferedReader(fReader);
+            writer = new PrintWriter(outputFile);
 
             // Build the heap
             for (int i = 1; i < maxSize; i++)
@@ -47,11 +54,19 @@ class MakeRuns {
             System.out.println("Next out is \"" + minHeap.minValue() + "\"");
             System.out.println();
 
-            minHeap.replace("g");
+            out = minHeap.replace("g");
+            writer.println(out);
             System.out.println("The Min Heap is ");
             minHeap.print();
             System.out.println("Next out is \"" + minHeap.minValue() + "\"");
 
+            out = minHeap.replace("h");
+            writer.println(out);
+            System.out.println("The Min Heap is ");
+            minHeap.print();
+            System.out.println("Next out is \"" + minHeap.minValue() + "\"");
+
+            writer.close();
         }
         catch (Exception e) {
             System.err.println(e);
@@ -64,6 +79,5 @@ class MakeRuns {
         for (int i = 0; i < 2; i++) {
             heap.minHeap();
         }
-
     }
 }
