@@ -44,6 +44,7 @@ class MakeRuns {
             fReader = new FileReader(inputFile);
             reader = new BufferedReader(fReader);
             writer = new PrintWriter(outputFile);
+            String[] tmpItems = new String[maxSize];
 
             // Build the heap
             for (int i = 1; i < maxSize; i++)
@@ -56,26 +57,30 @@ class MakeRuns {
             out = minHeap.replace(in);
             writer.println(out);
             in = reader.readLine();
+            int i = 0;
 
-            while (in != null) {
-                while (tmpSize > 0) {
-                    if (in.compareTo(out) >= 0)
+                while (in != null && tmpSize > 0) {
+                    String root = minHeap.root();
+                    if (root.compareTo(out) >= 0)
                     {
                         out = minHeap.replace(in);
                         writer.println(out);
+                        in = reader.readLine();
                     }
                     else {
                         minHeap.swap(1, tmpSize);
-                        minHeap.minHeap();
                         tmpSize--;
+                        tmpItems[i] = minHeap.getLastItem();
+                        minHeap.setLastItem(null);
+                        minHeap.setSize(tmpSize);
+                        minHeap.minHeap();
+                        i++;
                     }
                 }
-                writer.println("**");
+                writer.println("<>");
                 minHeap.minHeap();
                 tmpSize = maxSize - 1;
                 numRuns++;
-            }
-
 
 //            printHeap(minHeap);
 //            out = minHeap.replace("g");
