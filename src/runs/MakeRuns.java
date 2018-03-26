@@ -49,22 +49,13 @@ class MakeRuns {
             }
 
             Heapify(minHeap);
-            System.out.println("The Min Heap is ");
-            minHeap.print();
-            System.out.println("Next out is \"" + minHeap.minValue() + "\"");
-            System.out.println();
-
+            printHeap(minHeap);
             out = minHeap.replace("g");
             writer.println(out);
-            System.out.println("The Min Heap is ");
-            minHeap.print();
-            System.out.println("Next out is \"" + minHeap.minValue() + "\"");
-
+            printHeap(minHeap);
             out = minHeap.replace("h");
             writer.println(out);
-            System.out.println("The Min Heap is ");
-            minHeap.print();
-            System.out.println("Next out is \"" + minHeap.minValue() + "\"");
+            printHeap(minHeap);
 
             writer.close();
         }
@@ -79,5 +70,12 @@ class MakeRuns {
         for (int i = 0; i < 2; i++) {
             heap.minHeap();
         }
+    }
+
+    public static void printHeap(MinHeap heap) {
+        System.out.println("The Min Heap is ");
+        heap.print();
+        System.out.println("Next out is \"" + heap.minValue() + "\"");
+        System.out.println();
     }
 }
