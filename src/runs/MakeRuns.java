@@ -44,7 +44,7 @@ class MakeRuns {
             fReader = new FileReader(inputFile);
             reader = new BufferedReader(fReader);
             writer = new PrintWriter(outputFile);
-            String[] tmpItems = new String[maxSize];
+            String[] tmpItems = new String[100];
 
             // Build the heap
             for (int i = 1; i < maxSize; i++)
@@ -59,15 +59,14 @@ class MakeRuns {
             in = reader.readLine();
             int i = 0;
 
-                while (in != null && tmpSize > 0) {
+            while (in != null) {
+                if (tmpSize > 0) {
                     String root = minHeap.root();
-                    if (root.compareTo(out) >= 0)
-                    {
+                    if (root.compareTo(out) >= 0) {
                         out = minHeap.replace(in);
                         writer.println(out);
                         in = reader.readLine();
-                    }
-                    else {
+                    } else {
                         minHeap.swap(1, tmpSize);
                         tmpSize--;
                         tmpItems[i] = minHeap.getLastItem();
@@ -77,19 +76,40 @@ class MakeRuns {
                         i++;
                     }
                 }
-                writer.println("<>");
-                minHeap.minHeap();
-                tmpSize = maxSize - 1;
-                numRuns++;
+                else {
+                    writer.println("<>");
+                    tmpSize = maxSize - 1;
+                    for (int j = 0; j < tmpSize; j++)
+                    {
+                        minHeap.insert(tmpItems[j]);
+                    }
+                    minHeap.minHeap();
+                    numRuns++;
+                    out = minHeap.replace(in);
+                    in = reader.readLine();
+                }
+            }
 
-//            printHeap(minHeap);
-//            out = minHeap.replace("g");
-//            writer.println(out);
-//            printHeap(minHeap);
-//            out = minHeap.replace("h");
-//            writer.println(out);
-//            printHeap(minHeap);
+            writer.println("<>");
+            numRuns++;
+            tmpSize = maxSize - 1;
+            int j = 0;
 
+            while (minHeap.getSize() < tmpSize && tmpItems[j] != null) {
+                minHeap.insert(tmpItems[j]);
+                j++;
+            }
+
+            minHeap.minHeap();
+
+            for (int k = 1; k < tmpSize; k++)
+            {
+                out = minHeap.remove();
+                writer.println(out);
+            }
+
+            writer.println("<>");
+            numRuns++;
             writer.close();
             System.err.println("number of runs: " + Integer.toString(numRuns));
         }

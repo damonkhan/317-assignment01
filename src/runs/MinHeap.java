@@ -50,6 +50,9 @@ class MinHeap {
         String left = Heap[leftChild(pos)];
         String right = Heap[rightChild(pos)];
 
+        if (left == null)
+            return;
+
         if (right != null) {
             if (parent.compareTo(left) > 0 || parent.compareTo(right) > 0) {
                 if (left.compareTo(right) < 0) {
@@ -99,19 +102,13 @@ class MinHeap {
         return popped;
     }
 
-    public String minValue() {
-        return Heap[1];
-    }
 
     public String replace(String newRoot) {
         String popped = Heap[FRONT];
         Heap[FRONT] = newRoot;
-        downHeapify(FRONT);
+        if (size > 1)
+            downHeapify(FRONT);
         return popped;
-    }
-
-    public String root() {
-        return Heap[FRONT];
     }
 
     private void downHeapify(int pos) {
@@ -132,20 +129,19 @@ class MinHeap {
             right = Heap[rightChild(pos)];
         }
     }
-<<<<<<< HEAD
+
+    public void setSize(int size) { this.size = size; }
+
+    public int getSize() { return size; }
+
+    public void setLastItem(String item) { Heap[size] = item; }
+
+    public String getLastItem() { return Heap[size]; }
+
+    public String minValue() { return Heap[1]; }
+
+    public String root() { return Heap[FRONT]; }
+
+
 }
-=======
 
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public void setLastItem(String item) {
-        Heap[size] = item;
-    }
-
-    public String getLastItem() {
-        return Heap[size];
-    }
-}
->>>>>>> 2b232e319ca2e4c09596fdcb53ce4e69ab6130f5
