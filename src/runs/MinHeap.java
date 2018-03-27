@@ -83,9 +83,21 @@ class MinHeap {
 
     public void print() {
         for (int i = 1; i <= size / 2; i++) {
-            System.out.print(" PARENT : " + Heap[i] + " LEFT CHILD : " + Heap[2 * i]
-                    + " RIGHT CHILD :" + Heap[2 * i + 1]);
-            System.out.println();
+            if ((2 * i + 1) <= this.maxsize) {
+                System.out.print(" PARENT : " + Heap[i] + " LEFT CHILD : " + Heap[2 * i]
+                        + " RIGHT CHILD :" + Heap[2 * i + 1]);
+                System.out.println();
+            }
+            else if ((2 * i) <= this.maxsize) {
+                System.out.print(" PARENT : " + Heap[i] + " LEFT CHILD : " + Heap[2 * i]
+                        + " RIGHT CHILD : *null");
+                System.out.println();
+            }
+            else {
+                System.out.print(" PARENT : " + Heap[i] + " LEFT CHILD : *null"
+                        + " RIGHT CHILD : *null");
+                System.out.println();
+            }
         }
     }
 

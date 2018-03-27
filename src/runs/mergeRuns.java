@@ -18,7 +18,7 @@ class mergeRuns {
 	}
 	try{
 	    int maxSize = Integer.parseInt(args[0]);
-	    String filepath = "/Users/RileyCochrane/Desktop/" + args[1];
+	    String filepath = "/Users/damonkhan/Desktop/" + args[1];
 	    File file = new File(filepath);
 	    if(!(file.exists())){
 		 System.err.println("ERROR: file not found");
@@ -54,7 +54,7 @@ class mergeRuns {
 		line = reader.readLine();		
 	    }
 	    //now write to individual files
-	    String outgoingPath = "/Users/RileyCochrane/Desktop/runs/";
+	    String outgoingPath = "/Users/damonkhan/Desktop/runs/";
 	    File outgoing = new File(outgoingPath);
 	    FileWriter fileWriter;
 	    BufferedWriter writer;
@@ -82,7 +82,7 @@ class mergeRuns {
 	    //Get first element from all lists and put into heap
 	    MinHeap heap = new MinHeap(maxSize);
 	    for(int i = 0; i<maxSize; i++){
-		String fileName = "/Users/RileyCochrane/Desktop/runs/"
+		String fileName = "/Users/damonkhan/Desktop/runs/"
 		    + fileNames.get(i);
 		File inputFile = new File(fileName);
 		FileReader inputReader = new FileReader(inputFile);

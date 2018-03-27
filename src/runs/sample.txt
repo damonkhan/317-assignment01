@@ -1,18 +1,18 @@
 Dinosaurs
-Birds
-<>
-Animals
-Zebras
-<>
-Tuna
-Cats
-Dogs
-<>
-Harry
-Houdini
-Daryl
-Ollie
-<>
-Anna
-Karl
-Xavier
+      Birds
+      <>
+      Animals
+      Zebras
+      <>
+      Tuna
+      Cats
+      Dogs
+      <>
+      Harry
+      Houdini
+      Daryl
+      Ollie
+      <>
+      Anna
+      Karl
+      Xavier
