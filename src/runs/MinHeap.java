@@ -110,6 +110,10 @@ class MinHeap {
         return popped;
     }
 
+    public String root() {
+        return Heap[FRONT];
+    }
+
     private void downHeapify(int pos) {
 
         String parent = Heap[pos];
@@ -123,7 +127,25 @@ class MinHeap {
                 return;
             parent = Heap[pos];
             left = Heap[leftChild(pos)];
+            if (left == null)
+                return;
             right = Heap[rightChild(pos)];
         }
     }
+<<<<<<< HEAD
 }
+=======
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public void setLastItem(String item) {
+        Heap[size] = item;
+    }
+
+    public String getLastItem() {
+        return Heap[size];
+    }
+}
+>>>>>>> 2b232e319ca2e4c09596fdcb53ce4e69ab6130f5
