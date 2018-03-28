@@ -26,7 +26,8 @@ class MakeRuns {
         int maxSize = Integer.parseInt(args[0]) + 1;
         int numRuns = 0;
         String input = "/Users/damonkhan/Desktop/" + args[1];
-        String output = "/Users/damonkhan/Desktop/" + args[1] + ".runs";
+        String[] parts = args[1].split("\\.");
+        String output = "/Users/damonkhan/Desktop/" + parts[0] + ".runs";
         MinHeap minHeap = new MinHeap(maxSize);
         File inputFile = new File(input);
         File outputFile = new File(output);
@@ -35,10 +36,7 @@ class MakeRuns {
         BufferedReader reader;
         PrintWriter writer;
 
-
-
         try {
-
 
             if (!inputFile.exists()) {
                 System.out.println("Error: file not found");
@@ -66,22 +64,30 @@ class MakeRuns {
 
             heapify(minHeap);
             int tmpSize = minHeap.getSize();
+
+            // output of first datum in first run
             if (in != null) {
                 out = minHeap.replace(in);
             } else {
+                // no data to be read in, remove root from heap and reheap
                 out = minHeap.remove();
                 tmpSize--;
             }
+
+            // write datum to file
             writer.println(out);
             in = reader.readLine();
-            String root = minHeap.root();
+            String root;
 
 
+            // while there is data to be read or in heap
             while (in != null || tmpSize > 0 || tmpItems.size() > 0) {
+                // break when no data to be read or in heap
                 if (in == null && minHeap.getSize() == 0) {
                     if (tmpItems.size() == 0)
                         break;
                     else {
+                        // output final run then break
                         for (String item : tmpItems) {
                             minHeap.insert(item);
                         }
@@ -96,19 +102,24 @@ class MakeRuns {
                     }
                 }
 
+                // if there is data in the heap
                 if (tmpSize > 0) {
+                    // compare the root to last output data
                     root = minHeap.root();
                     if (root.compareTo(out) >= 0) {
                         if (in != null) {
+                            // replace root if there is data to be read in
                             out = minHeap.replace(in);
                             in = reader.readLine();
                         } else {
+                            // otherwise, remove root and reheap
                             out = minHeap.remove();
                             tmpSize--;
                         }
                         writer.println(out);
                     }
                     else {
+                        // swap root with last item and reduce notional size of heap
                         minHeap.swap(1, tmpSize);
                         tmpItems.add(minHeap.getItem(tmpSize));
                         tmpSize--;
@@ -117,6 +128,7 @@ class MakeRuns {
                         minHeap.downHeapify(1);
                     }
                 }
+                // no data in the heap, so rebuild new heap
                 else {
                     int i = 0;
                     for (String item : tmpItems) {
@@ -124,16 +136,19 @@ class MakeRuns {
                     }
                     tmpItems.removeAll(tmpItems);
                     minHeap.downHeapify(1);
-                    tmpSize = maxSize - 1;
+                    tmpSize = minHeap.getSize();
                     writer.println("<>");
                     numRuns++;
 
+                    // if there is data to be read in
                     if (in != null) {
+                        // then replace root with new datum
                         out = minHeap.replace(in);
                         in = reader.readLine();
                         writer.println(out);
                     }
                     else {
+                        // otherwise output min value
                         while (tmpSize > 0) {
                             out = minHeap.remove();
                             tmpSize--;
@@ -149,7 +164,6 @@ class MakeRuns {
         catch (Exception e) {
             System.err.println(e);
         }
-
     }
 
     public static void heapify(MinHeap heap) {
@@ -157,22 +171,5 @@ class MakeRuns {
         for (int i = 0; i < 2; i++) {
             heap.minHeap();
         }
-    }
-
-    public static void printHeap(MinHeap heap) {
-        System.out.println("The Min Heap is ");
-        heap.print();
-        System.out.println("Next out is \"" + heap.minValue() + "\"");
-        System.out.println();
-    }
-
-    public static void replacementSelection(MinHeap minHeap, String in, PrintWriter writer)
-    {
-        String out = minHeap.replace(in);
-        writer.println(out);
-    }
-
-    public static void reduceHeap(MinHeap minHeap, int size) {
-        minHeap.swap(1, size);
     }
 }
