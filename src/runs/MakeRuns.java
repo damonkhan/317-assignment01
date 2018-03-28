@@ -24,7 +24,6 @@ class MakeRuns {
 
         // Initialize all the parts...
         int maxSize = Integer.parseInt(args[0]) + 1;
-        int tmpSize = maxSize - 1;
         int numRuns = 0;
         String input = "/Users/damonkhan/Desktop/" + args[1];
         String output = "/Users/damonkhan/Desktop/" + args[1] + ".runs";
@@ -49,27 +48,54 @@ class MakeRuns {
             fReader = new FileReader(inputFile);
             reader = new BufferedReader(fReader);
             writer = new PrintWriter(outputFile);
-//            String[] tmpItems = new String[tmpSize];
             List<String> tmpItems = new ArrayList<>();
+            String in = reader.readLine();
 
             // Build the heap
             for (int i = 1; i < maxSize; i++)
             {
-                minHeap.insert(reader.readLine());
+                if (in != null)
+                    minHeap.insert(in);
+
+                if (in == null)
+                    break;
+
+                in = reader.readLine();
+
             }
 
             heapify(minHeap);
-            String in = reader.readLine();
-            out = minHeap.replace(in);
+            int tmpSize = minHeap.getSize();
+            if (in != null) {
+                out = minHeap.replace(in);
+            } else {
+                out = minHeap.remove();
+                tmpSize--;
+            }
             writer.println(out);
             in = reader.readLine();
             String root = minHeap.root();
 
 
-            while (in != null || tmpSize > 0) {
+            while (in != null || tmpSize > 0 || tmpItems.size() > 0) {
                 if (in == null && minHeap.getSize() == 0) {
-                    break;
+                    if (tmpItems.size() == 0)
+                        break;
+                    else {
+                        for (String item : tmpItems) {
+                            minHeap.insert(item);
+                        }
+                        minHeap.downHeapify(1);
+                        writer.println("<>");
+                        numRuns++;
+                        while (minHeap.getSize() > 0) {
+                            out = minHeap.remove();
+                            writer.println(out);
+                        }
+                        break;
+                    }
                 }
+
                 if (tmpSize > 0) {
                     root = minHeap.root();
                     if (root.compareTo(out) >= 0) {
@@ -78,6 +104,7 @@ class MakeRuns {
                             in = reader.readLine();
                         } else {
                             out = minHeap.remove();
+                            tmpSize--;
                         }
                         writer.println(out);
                     }
@@ -103,6 +130,7 @@ class MakeRuns {
 
                     if (in != null) {
                         out = minHeap.replace(in);
+                        in = reader.readLine();
                         writer.println(out);
                     }
                     else {
