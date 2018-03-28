@@ -76,6 +76,15 @@ class MinHeap {
         }
     }
 
+
+    public void insert(String element) {
+        size++;
+        if (size <= maxsize)
+            Heap[size] = element;
+        else
+            System.err.println("Error: '" + element + "' - heap at capacity");
+    }
+
     public void insert(String element, String fileName) {
         size++;
         if (size <= maxsize)
@@ -113,8 +122,10 @@ class MinHeap {
 
     public String remove() {
         String popped = Heap[FRONT];
-        Heap[FRONT] = Heap[size--];
+        Heap[FRONT] = Heap[size];
+        setItem(size, null);
         minHeapify(FRONT);
+        size--;
         return popped;
     }
 
@@ -141,7 +152,7 @@ class MinHeap {
 	}
     }
 
-    private void downHeapify(int pos) {
+    public void downHeapify(int pos) {
 
         String parent = Heap[pos];
         String left = Heap[leftChild(pos)];
@@ -168,9 +179,9 @@ class MinHeap {
 
     public int getSize() { return size; }
 
-    public void setLastItem(String item) { Heap[size] = item; }
+    public void setItem(int pos, String item) { Heap[size] = item; }
 
-    public String getLastItem() { return Heap[size]; }
+    public String getItem(int pos) { return Heap[pos]; }
 
     public String minValue() { return Heap[1]; }
 
