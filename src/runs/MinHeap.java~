@@ -50,9 +50,6 @@ class MinHeap {
         String left = Heap[leftChild(pos)];
         String right = Heap[rightChild(pos)];
 
-        if (left == null)
-            return;
-
         if (right != null) {
             if (parent.compareTo(left) > 0 || parent.compareTo(right) > 0) {
                 if (left.compareTo(right) < 0) {
@@ -72,10 +69,10 @@ class MinHeap {
         }
     }
 
-    public void insert(String element, String fileName) {
+    public void insert(String element) {
         size++;
         if (size <= maxsize)
-            Heap[size] = element + " " + fileName;
+            Heap[size] = element;
         else
             System.err.println("Error: '" + element + "' - heap at capacity");
 
@@ -83,21 +80,9 @@ class MinHeap {
 
     public void print() {
         for (int i = 1; i <= size / 2; i++) {
-            if ((2 * i + 1) <= this.maxsize) {
-                System.out.print(" PARENT : " + Heap[i] + " LEFT CHILD : " + Heap[2 * i]
-                        + " RIGHT CHILD :" + Heap[2 * i + 1]);
-                System.out.println();
-            }
-            else if ((2 * i) <= this.maxsize) {
-                System.out.print(" PARENT : " + Heap[i] + " LEFT CHILD : " + Heap[2 * i]
-                        + " RIGHT CHILD : *null");
-                System.out.println();
-            }
-            else {
-                System.out.print(" PARENT : " + Heap[i] + " LEFT CHILD : *null"
-                        + " RIGHT CHILD : *null");
-                System.out.println();
-            }
+            System.out.print(" PARENT : " + Heap[i] + " LEFT CHILD : " + Heap[2 * i]
+                    + " RIGHT CHILD :" + Heap[2 * i + 1]);
+            System.out.println();
         }
     }
 
@@ -114,27 +99,19 @@ class MinHeap {
         return popped;
     }
 
+    public String minValue() {
+        return Heap[1];
+    }
 
     public String replace(String newRoot) {
         String popped = Heap[FRONT];
         Heap[FRONT] = newRoot;
-        if (size > 1)
-            downHeapify(FRONT);
+        downHeapify(FRONT);
         return popped;
     }
-    
-    public String removeFront(){
-	String popped = Heap[FRONT];
-	return popped;
-    }
-    
-    public void replaceFront(String newRoot, String fileName){
-	String one = newRoot + " " + fileName;
-	Heap[FRONT] = one;
-        if (size > 1){
-	    System.err.println("IN if");
-            downHeapify(FRONT);
-	}
+
+    public String root() {
+        return Heap[FRONT];
     }
 
     private void downHeapify(int pos) {
@@ -155,19 +132,20 @@ class MinHeap {
             right = Heap[rightChild(pos)];
         }
     }
-
-    public void setSize(int size) { this.size = size; }
-
-    public int getSize() { return size; }
-
-    public void setLastItem(String item) { Heap[size] = item; }
-
-    public String getLastItem() { return Heap[size]; }
-
-    public String minValue() { return Heap[1]; }
-
-    public String root() { return Heap[FRONT]; }
-
-
+<<<<<<< HEAD
 }
+=======
 
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public void setLastItem(String item) {
+        Heap[size] = item;
+    }
+
+    public String getLastItem() {
+        return Heap[size];
+    }
+}
+>>>>>>> 2b232e319ca2e4c09596fdcb53ce4e69ab6130f5

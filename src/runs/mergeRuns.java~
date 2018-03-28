@@ -80,7 +80,6 @@ class mergeRuns {
 		System.err.println(fileNames.get(i));
 	    }
 	    //Get first element from all lists and put into heap
-	    //Making sure that when element is inserted it is removed from file
 	    MinHeap heap = new MinHeap(maxSize);
 	    for(int i = 0; i<maxSize; i++){
 		String fileName = "/Users/RileyCochrane/Desktop/runs/"
@@ -89,18 +88,39 @@ class mergeRuns {
 		FileReader inputReader = new FileReader(inputFile);
 		BufferedReader br = new BufferedReader(inputReader);
 		String newLine = br.readLine();
-		heap.insert(newLine, fileNames.get(i));
-		removeLine(inputFile, newLine);
-		
+		heap.insert(newLine);
 	    }
+	     heap.print();
 	    heapify(heap);
-	    heap.print();
-	    String front = heap.removeFront();
-	    String[] frontFile = front.split(" ");
-	    System.err.println(frontFile[0] + " Came from " + frontFile[1]);
-	    heap.replace("TEST");
+	    System.err.println(" HEAPIFIED");
 	    heap.print();
 	    
+
+	    /*
+	    //Get all the elements from every inner List
+	    for(int i = 0; i<listArray.length; i++){
+	        List<String> current = listArray[i];
+		System.err.println("CURRENT LIST " + i);
+		for(int j = 0; j<current.size(); j++){
+		    System.err.println(current.get(j));
+		}
+	    }*/
+	    /*
+	    minHeap heap = new minHeap(maxSize);
+	    for(int i = 0; i<maxSize; i++){
+		if(line != null){
+		    heap.insert(line);
+		    line = reader.readLine();
+		}
+		else{
+		    break;
+		}
+	    }
+	    heap.print();
+	    heapify(heap);
+	    System.err.println("REPRTINED HEAPIFIED");
+	    heap.print();
+	    */
 	}
 	catch(Exception e){
 	    System.err.println("Exception Error: " + e);
@@ -112,43 +132,5 @@ class mergeRuns {
             heap.minHeap();
         }
 
-    }
-    public static void removeLine(File file, String line){
-	try{
-	    String name = "newFile";
-	    String outputDir = "/Users/RileyCochrane/Desktop/runs/output/";
-	    File output = new File(outputDir);
-	    File outputFile = File.createTempFile(name, ".txt", output);
-	    //Create a writer to write contents to new file
-	    FileWriter outputWriter = new FileWriter(outputFile);
-	    BufferedWriter writer = new BufferedWriter(outputWriter);
-	    //Create reader to read through file given
-	    FileReader input = new FileReader(file);
-	    BufferedReader reader = new BufferedReader(input);
-	    //Read the first line of the file
-	    String readLine = reader.readLine();
-	    if((line.compareTo(readLine) == 0)){
-		//if line is line to remove ie first, then write out from next line
-		readLine = reader.readLine();
-		while(readLine!=null){
-		    writer.write(readLine);
-		    writer.newLine();
-		    readLine = reader.readLine();
-		}		
-	    }
-	    reader.close();
-	    writer.close();
-	    
-	    File newName = new File(file.getAbsolutePath());
-	    boolean success = outputFile.renameTo(newName);
-	}
-	catch(Exception e){
-	    System.err.println("EXCEPTION: " + e);
-	}
-    }
-
-    public String getNext(File file, String element){
-	String s = "";
-	return s;
     }
 }
