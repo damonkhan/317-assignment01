@@ -47,8 +47,12 @@ class MinHeap {
 
     private void minHeapify(int pos) {
         String parent = Heap[pos];
-        String left = Heap[leftChild(pos)];
-        String right = Heap[rightChild(pos)];
+        String left = null;
+        String right = null;
+        if (leftChild(pos) <= maxsize)
+            left = Heap[leftChild(pos)];
+        if (rightChild(pos) <= maxsize)
+            right = Heap[rightChild(pos)];
 
         if (left == null)
             return;
@@ -146,13 +150,17 @@ class MinHeap {
         while (right == null || parent.compareTo(left) > 0 || parent.compareTo(right) > 0) {
             minHeapify(pos);
             pos++;
+            if (pos > maxsize)
+                    return;
             if (right == null)
                 return;
             parent = Heap[pos];
-            left = Heap[leftChild(pos)];
+            if (leftChild(pos) <= maxsize)
+                left = Heap[leftChild(pos)];
             if (left == null)
                 return;
-            right = Heap[rightChild(pos)];
+            if (rightChild(pos) <= maxsize)
+                right = Heap[rightChild(pos)];
         }
     }
 
