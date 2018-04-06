@@ -1,0 +1,17 @@
+This project is the work of Damon Khan and Riley Cochrane for COMP-317 Assignment 01.
+
+The MakeRuns class does not work 100% correct for heap sizes > the number of datum being read in. It does still create runs in an ordered fashion, but I believe the heap shouldn't create more than a single run if the heap is able to contain all of that data at once.
+
+We also lost about 3-days worth of code for our mergeRuns.java file. As such, the file we are uploading at this stage is incomplete. We have emailed Tony regarding this.
+
+Project has been created as a Java package comprising 3 java files: MinHeap.java, MakeRuns.java and mergeRuns.java. As such,
+package compilation is necessary in order to correctly compile and run the Java Classes.
+
+To do:
+
+1) cd into the directory that contains all 3 .java files
+2) force the compiler to create a package in the current directory by typing: javac -d . MinHeap.java MakeRuns.java mergeRuns.java
+3) a directory called 'runs' will be created in the current working directory indicating that compilation was successful.
+4) add the txt file to the 'runs' directory. This is crucial - program will not run if the txt file is not added to 'runs'.
+4) to run the class files, invoke the package by typing: java runs.MakeRuns or java runs.mergeRuns (Be sure to add the appropriate program arguments)
+5) the output file will be created within the 'runs' directory.
