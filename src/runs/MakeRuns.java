@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //                                                                          //
-// Authors: Damon Khan 1265776 & Riley Cochrane                              //
+// Authors: Damon Khan 1265776 & Riley Cochrane 1218251                     //
 //                                                                          //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -25,12 +25,17 @@ class MakeRuns {
         // Initialize all the parts...
         int maxSize = Integer.parseInt(args[0]) + 1;
         int numRuns = 0;
-        String input = "/Users/damonkhan/Desktop/" + args[1];
         String[] parts = args[1].split("\\.");
-        String output = "/Users/damonkhan/Desktop/" + parts[0] + ".runs";
+        // Create a heap of size k
         MinHeap minHeap = new MinHeap(maxSize);
-        File inputFile = new File(input);
+
+        // Get the input file from the runs directory
+        String filePath = new File("").getAbsolutePath() + "/runs/" + args[1];
+        // Create an output file inside of the runs directory
+        String output = new File("").getAbsolutePath() + "/runs/" + parts[0] + ".runs";
+        File inputFile = new File(filePath);
         File outputFile = new File(output);
+        // The datum to be output
         String out = "";
         FileReader fReader;
         BufferedReader reader;
@@ -39,7 +44,7 @@ class MakeRuns {
         try {
 
             if (!inputFile.exists()) {
-                System.out.println("Error: file not found");
+                System.out.println("Error: file not found - did you add the txt file to the 'runs' directory?");
                 return;
             }
 
